@@ -1,0 +1,142 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "flights": {
+      "root": "apps/flights/",
+      "sourceRoot": "apps/flights/src",
+      "projectType": "application",
+      "prefix": "flights",
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/flights",
+            "index": "apps/flights/src/index.html",
+            "main": "apps/flights/src/main.ts",
+            "polyfills": "apps/flights/src/polyfills.ts",
+            "tsConfig": "apps/flights/tsconfig.app.json",
+            "assets": [
+              "apps/flights/src/favicon.ico",
+              "apps/flights/src/assets"
+            ],
+            "styles": ["apps/flights/src/styles.scss"],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/flights/src/environments/environment.ts",
+                  "with": "apps/flights/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "flights:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "flights:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "flights:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/flights/tsconfig.app.json",
+              "apps/flights/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "apps/flights/jest.config.js",
+            "tsConfig": "apps/flights/tsconfig.spec.json",
+            "setupFile": "apps/flights/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "flights-e2e": {
+      "root": "apps/flights-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/builders:cypress",
+          "options": {
+            "cypressConfig": "apps/flights-e2e/cypress.json",
+            "tsConfig": "apps/flights-e2e/tsconfig.e2e.json",
+            "devServerTarget": "flights:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "flights:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/flights-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/schematics"
+  },
+  "schematics": {
+    "@nrwl/schematics:application": {
+      "style": "scss",
+      "framework": "angular"
+    },
+    "@nrwl/schematics:library": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "flights"
+}

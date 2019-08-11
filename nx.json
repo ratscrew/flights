@@ -1,0 +1,18 @@
+{
+  "npmScope": "flights",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "flights": {
+      "tags": []
+    },
+    "flights-e2e": {
+      "tags": []
+    }
+  }
+}
