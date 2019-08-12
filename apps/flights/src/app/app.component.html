@@ -3,7 +3,7 @@
     Flight Rotations Tool
   </h1>
   <div style="flex: auto; text-align: right;margin-top: 14px;" >
-    <mat-form-field>
+    <mat-form-field style="width: 150px;" >
       <input matInput [matDatepicker]="picker" placeholder="Rotation Date" (dateChange)="setRotationDate($event)">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
