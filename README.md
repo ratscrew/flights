@@ -17,7 +17,7 @@ Run `npm install`
 
 ## Development server
 
-Run `ng serve project flights` for a dev server. Navigate to `http://localhost:4200/`.
+Run `ng serve --project flights` for a dev server. Navigate to `http://localhost:4200/`.
 
 
 
