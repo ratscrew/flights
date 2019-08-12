@@ -1,0 +1,103 @@
+<div style="display: flex" >
+  <h2>
+    Flights
+  </h2>
+  <div  >
+    <div style="margin-top: 18px; margin-left: 4px;    background-color: #558a54;    padding: 4px;    border-radius: 14px;">
+      <span style="color: #fff;">
+        {{flights.length}}
+      </span>
+      /
+      <span >
+        {{totalFlightsCount}}
+      </span>
+    </div>
+    
+  </div>
+  
+
+  <div style="text-align: right; flex: auto;margin-top: 14px;" >
+      <mat-slide-toggle style="vertical-align: middle;" [checked]="filters?.autoFilter" (change)="setFilter('autoFilter',$event.checked)">Auto Filter</mat-slide-toggle>
+  
+      <button mat-icon-button [matMenuTriggerFor]="appMenu" [class.filter-in-use]="filters?.departuretime || filters?.arrivaltime || filters?.origin || filters?.destination || filters?.alreadyInUs" >
+        <mat-icon>filter_list</mat-icon>
+      </button>
+  </div>
+</div>
+
+
+
+<mat-menu #appMenu="matMenu">
+    <div class="menu-item" >
+        Depart After:
+      <mat-form-field style="width: 50px;">
+        <input style=" text-align: right;" (click)="$event.stopPropagation();" matInput type="number" placeholder="Hours" [value]="getHours(filters?.departuretime)" (blur)="setFilter('departuretime-hours',$event.target.value)" >
+      </mat-form-field>:
+      <mat-form-field style="width: 50px;">
+        <input style="text-align: right;" (click)="$event.stopPropagation();" matInput type="number" placeholder="Minutes" [value]="getMinutes(filters?.departuretime)" (blur)="setFilter('departuretime-minutes',$event.target.value)">
+      </mat-form-field>
+    </div>
+    <div class="menu-item">
+        Arrive Before:
+      <mat-form-field style="width: 50px;">
+        <input style=" text-align: right;" (click)="$event.stopPropagation();" matInput type="number" placeholder="Hours" [value]="getHours(filters?.arrivaltime)" (blur)="setFilter('arrivaltime-hours',$event.target.value)" >
+      </mat-form-field>:
+      <mat-form-field style="width: 50px;">
+        <input style="text-align: right;" (click)="$event.stopPropagation();" matInput type="number" placeholder="Minutes" [value]="getMinutes(filters?.arrivaltime)" (blur)="setFilter('arrivaltime-minutes',$event.target.value)" >
+      </mat-form-field>
+    </div>
+    
+    <div class="menu-item">
+        Depart From:
+      <mat-form-field style="width: 100px;">
+        <input style=" text-align: right;" (click)="$event.stopPropagation();" matInput type="text" placeholder="Airport Code" [value]="filters?.origin || ''" (blur)="setFilter('origin',$event.target.value)">
+      </mat-form-field>
+    </div>
+    
+    <div class="menu-item">
+        Arrive At:
+      <mat-form-field style="width: 100px;">
+        <input style=" text-align: right;" (click)="$event.stopPropagation();" matInput type="text" placeholder="Airport Code" [value]="filters?.destination || ''" (blur)="setFilter('destination',$event.target.value)">
+      </mat-form-field>
+    </div>
+    
+    <div class="menu-item">
+        <mat-checkbox [checked]="filters?.alreadyInUs" (click)="$event.stopPropagation();" (change)="setFilter('alreadyInUs',$event.checked)" >Include Already In Use</mat-checkbox>
+    </div>
+</mat-menu>
+  
+
+
+
+
+
+
+<mat-list>
+  <mat-list-item *ngFor="let flight of flights; trackBy:trackBy; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }" style="height: 80px;" >
+    <!-- <h3 matLine>{{flight.id}}:: {{flight.origin}} <mat-icon style="vertical-align: middle;" >arrow_right_alt</mat-icon> {{flight.destination}} </h3>
+    <p matLine>
+      Departure:<span> {{flight.readable_departure}} </span>
+      Arrival:<span> {{flight.readable_arrival}} </span>
+      Duration:<span>{{duration(flight.departuretime,flight.arrivaltime)}}</span>
+    </p> -->
+
+    <div matLine style="display: flex; padding-right:16px;" >
+      <div style="flex: 1;" >
+          <div style="margin-top: 14px;" >{{flight.origin}}</div>
+          <div>{{flight.readable_departure}}</div>
+      </div>
+      <div style="flex: 1; text-align: center;">
+        <div>{{flight.id}}</div>
+        <div><mat-icon style="vertical-align: middle;" >arrow_right_alt</mat-icon></div>
+        <div>{{duration(flight.departuretime,flight.arrivaltime)}}</div>
+      </div>
+      <div style="flex: 1; text-align: right;">
+          <div style="margin-top: 14px;">{{flight.destination}}</div>
+          <div>{{flight.readable_arrival}}</div>
+      </div>
+    </div>
+    <div>
+      <button  mat-raised-button (click)="addFlightToRotation(flight.id)" [disabled]="disabled" >Add To Rotation</button>
+    </div>
+  </mat-list-item>
+</mat-list>

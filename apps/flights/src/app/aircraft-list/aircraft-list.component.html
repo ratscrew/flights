@@ -1,0 +1,36 @@
+<div style="display: flex;">
+  <h2>
+    Aircrafts
+  </h2>
+  <div style="flex: auto; text-align: right; margin-top: 14px;" >
+      <button mat-icon-button (click)="addAircrafts()"  >
+        <mat-icon>add</mat-icon>
+      </button>
+  </div>
+</div>
+
+
+
+<mat-list>
+  <mat-list-item *ngFor="let aircraft of aircrafts; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }" (click)="selectAircraft(aircraft.ident)" class="selectable" [class.selected]="selectedId === aircraft.ident" >
+    <h3 matLine> {{aircraft.ident}} </h3>
+    <p matLine>
+      Base:<span> {{aircraft.base}} </span>
+      Type:<span class="demo-2"> {{aircraft.type}} </span>
+    </p>
+    <div matLine>
+     
+      
+      <div class="percent-bar" >
+        <div class="percent-utilization" [style.width]="aircraft?.rotation?.utilization * 100 + '%'" >
+            <span *ngIf="aircraft?.rotation?.utilization >= .2">{{aircraft?.rotation?.utilization | percent}}</span>
+        </div>
+        <div class="percent-min-ground" [style.width]="aircraft?.rotation?.minGroundUtilizationTime * 100 + '%'">
+          <span *ngIf="aircraft?.rotation?.minGroundUtilizationTime >= .2 || (aircraft?.rotation?.utilization + aircraft?.rotation?.minGroundUtilizationTime) >= .8">{{aircraft?.rotation?.minGroundUtilizationTime | percent}}</span>
+        </div>
+        <span *ngIf="aircraft?.rotation?.utilization < .2">{{aircraft?.rotation?.utilization | percent}}</span>
+        <span *ngIf="aircraft?.rotation?.minGroundUtilizationTime < .2 && (aircraft?.rotation?.utilization + aircraft?.rotation?.minGroundUtilizationTime) < .8">{{aircraft?.rotation?.minGroundUtilizationTime | percent}}</span>
+      </div>
+    </div>
+  </mat-list-item>
+</mat-list>

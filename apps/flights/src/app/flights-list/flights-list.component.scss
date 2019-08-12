@@ -1,0 +1,22 @@
+:host{
+    display: inline-block;
+    background-color: #fff;
+    margin: 8px;
+    padding: 8px;
+    box-shadow: 0 10px 6px -6px #777;
+    overflow: auto;
+    border-radius: 4px;
+}
+
+.menu-item{
+    padding: 0 16px;
+}
+
+.filter-in-use{
+    color: #00c0ff;
+    background-color: #ffc7d11c;
+}
+
+.odd{
+    background-color: #f9f7f7;
+}

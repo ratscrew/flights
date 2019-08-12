@@ -1,0 +1,14 @@
+<div style="display: flex;">
+  <div style="flex: 1;text-align: left">00:00h</div>
+  <div style="flex: 1;text-align: center">12:00h</div>
+  <div style="flex: 1;text-align: right">24:00h</div>
+</div>
+<div class="axes">
+    <div class="axes-12"></div>
+</div>
+<div class="chart">
+  <div class="item" [class.flight]="item.type === 'flight'" [class.turnaround]="item.type === 'turnaround'" [class.error]="item.error" *ngFor="let item of schedual" [style.width]="item.lengthP + '%'" [style.left]="item.startP + '%'" >
+    <span *ngIf="item.type === 'flight'">{{item.origin}} <mat-icon style="vertical-align: middle;" >arrow_right_alt</mat-icon> {{item.destination}}</span>
+    <!-- <span *ngIf="item.type === 'turnaround'"> Min Turnaround</span> -->
+  </div>
+</div>

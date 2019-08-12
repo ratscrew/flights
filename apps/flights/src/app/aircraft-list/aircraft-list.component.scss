@@ -1,0 +1,46 @@
+:host{
+    display: inline-block;
+    background-color: #fff;
+    margin: 8px;
+    padding: 8px;
+    box-shadow: 0 10px 6px -6px #777;
+    overflow: auto;
+    border-radius: 4px;
+}
+
+.selected{
+    background-color: #93b4dc8a !important;
+}
+
+.selectable{
+    cursor: pointer;
+    border-radius: 4px;
+}
+:hover.selectable{
+    background-color: #93b4dc33;
+}
+
+.percent-bar{
+    background-color: whitesmoke;
+    height: 16px;    
+}
+.percent-utilization{
+    height:100%;
+    display: inline-block;
+    background-color: purple;
+    text-align: right;
+    color: white;
+    overflow: hidden;
+} 
+.percent-min-ground{
+    height:100%;
+    display: inline-block;
+    background-color: #88ad88;
+    text-align: right;
+    color: white;
+    overflow: hidden;
+}  
+
+.odd{
+    background-color: #f9f7f7;
+}

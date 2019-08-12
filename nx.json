@@ -13,6 +13,15 @@
     },
     "flights-e2e": {
       "tags": []
+    },
+    "data": {
+      "tags": []
+    },
+    "store": {
+      "tags": []
+    },
+    "material": {
+      "tags": []
     }
   }
 }

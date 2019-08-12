@@ -1,0 +1,47 @@
+:host{
+    display: block;
+    border-radius: 4px;
+}
+
+.chart{
+    border: solid #7dc591 1px;
+    height: 34px;
+    background-color: #558a54;
+}
+
+.item{
+    position: absolute;
+    height: 32px;
+    border: solid #7dc591 1px;
+    overflow: hidden;
+    text-align: center;
+    color: #fff;
+    font-size: 10px;
+    line-height: 32px;
+}
+
+.turnaround{
+    background-color: #88ad88  ;
+}
+
+.flight{
+    background-color: purple;
+}
+
+.error {
+    background-color:red !important;
+    z-index: 2;
+}
+
+.axes{
+    border-top:solid black 1px;
+    border-left:solid black 1px;
+    border-right:solid black 1px;
+    height: 4px;
+}
+
+.axes-12{
+    width: 50%;
+    border-right:solid black 1px;
+    height: 4px;
+}

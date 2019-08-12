@@ -1,25 +1,33 @@
-<div style="text-align:center">
-  <h1>Welcome to {{ title }}!</h1>
-  <img
-    width="450"
-    src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png"
-  />
+<div style="display: flex;padding: 4px 16px;background-color: #00adff;color: #fff; box-shadow: 0 10px 6px -6px #777;margin-bottom: 16px;" >
+  <h1>
+    Flight Rotations Tool
+  </h1>
+  <div style="flex: auto; text-align: right;margin-top: 14px;" >
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Rotation Date" (dateChange)="setRotationDate($event)">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
 </div>
 
-<p>This is an Angular app built with <a href="https://nx.dev">Nx</a>.</p>
-<p>🔎 **Nx is a set of Angular CLI power-ups for modern development.**</p>
 
-<h2>Quick Start & Documentation</h2>
 
-<ul>
-  <li>
-    <a href="https://nx.dev/getting-started/what-is-nx"
-      >30-minute video showing all Nx features</a
-    >
-  </li>
-  <li>
-    <a href="https://nx.dev/tutorial/01-create-application"
-      >Interactive tutorial</a
-    >
-  </li>
-</ul>
+<div style="display: flex;flex: auto;overflow: hidden;" >
+  <flights-aircraft-list 
+    style="flex: 1;" [aircrafts]="aircrafts | async" (changeSelection)="setAircraft($event)" 
+    [selectedId]="selectedAircraftId | async" (addAircraft)="addAircrafts()" >
+  </flights-aircraft-list>
+  <flights-rotation style="flex: 1;" [selectedRotation]="selectedRotation | async" 
+    [flights]="rotationFlights | async" (flightRemoved)="flightRemoved($event)" 
+    [disabled]="noRotation | async" >
+  </flights-rotation>
+  <flights-flights-list style="flex: 1;" [flights]="flights | async" 
+    (addToRotation)="addToRotation($event)" [disabled]="noRotation | async" 
+    [filters]="flightFilters | async" (setFilters)="setFilters($event)"
+    [totalFlightsCount]="totalFlightsCount | async" >
+  </flights-flights-list>
+</div>
+<div>
+  <flights-rotation-chart style="margin: 8px;" [schedual]="rotationchedual | async" ></flights-rotation-chart>
+</div>

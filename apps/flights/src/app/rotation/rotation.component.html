@@ -1,0 +1,35 @@
+<div style="display: flex;">
+  <h2>
+    Rotation
+  </h2>
+  <div *ngIf="!disabled" style="flex:auto;text-align: center;  margin-top: 29px;  font-weight: 600;" >
+    Aircraft: {{selectedRotation.aircraftId}}  Date: {{selectedRotation.date | date}}
+  </div>
+</div>
+
+<div>
+  <div class="errors" *ngFor="let error of selectedRotation?.errors;">
+    ERROR:  {{error.msg}}
+  </div>
+</div>
+
+<div *ngIf="disabled">
+  An aircraft and date must be selected.  Please select an aircraft from the left by clicking one, and pick a date from the top right right hand corner.
+</div>
+
+
+
+<mat-list >
+  <mat-list-item *ngFor="let flight of flights || []; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }" [class.flight-error]="!!selectedRotation?.highlightErrorFields[flight.id]" >
+    <h3 matLine>{{flight.id}}: <span [class.field-error]="!!selectedRotation?.highlightErrorFields[flight.id]?.origin">{{flight.origin}}</span> <mat-icon style="vertical-align: middle;" >arrow_right_alt</mat-icon> <span [class.field-error]="!!selectedRotation?.highlightErrorFields[flight.id]?.destination">{{flight.destination}}</span> </h3>
+    <p matLine>
+      <span [class.field-error]="!!selectedRotation?.highlightErrorFields[flight.id]?.departuretime" > Departure: {{flight.readable_departure}} </span>
+      <span [class.field-error]="!!selectedRotation?.highlightErrorFields[flight.id]?.arrivaltime" > Arrival: {{flight.readable_arrival}} </span>
+    </p>
+    <div>
+      <button  mat-raised-button (click)="removeFlight(flight.id)">Remove Flight</button>
+    </div>
+  </mat-list-item>
+</mat-list>
+
+
